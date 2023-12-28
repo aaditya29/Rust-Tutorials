@@ -15,7 +15,7 @@ fn main() {
 }
 ```
 
-#### Output:
+##### Output:
 
-The value of x is: 5
+The value of x is: 5<br>
 The value of x is: 6
