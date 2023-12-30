@@ -34,3 +34,40 @@ fn main() {
     let y: f32 = 3.0; // f32
 }
 ```
+
+### Numeric Operations
+
+Rust supports the basic mathematical operations you’d expect for all the number types: addition, subtraction, multiplication, division, and remainder.<br>
+
+```Rust
+fn main() {
+    // addition
+    let sum = 5 + 10;
+
+    // subtraction
+    let difference = 95.5 - 4.3;
+
+    // multiplication
+    let product = 4 * 30;
+
+    // division
+    let quotient = 56.7 / 32.2;
+    let truncated = -5 / 3; // Results in -1
+
+    // remainder
+    let remainder = 43 % 5;
+}
+```
+
+### The Boolean Type
+
+A Boolean type in Rust has two possible values: `true` and `false`. Booleans are one byte in size. The Boolean type in Rust is specified using bool. <br>
+<b>For example:</b>
+
+```Rust
+fn main() {
+    let t = true;
+
+    let f: bool = false; // with explicit type annotation
+}
+```
