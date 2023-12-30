@@ -136,3 +136,27 @@ fn main() {
     let one = x.2;
 }
 ```
+
+### The Array Type
+
+Another way to have a collection of multiple values is with an array. Unlike a tuple, every element of an array must have the same type. Unlike arrays in some other languages, arrays in Rust have a fixed length.<br>
+We write the values in an array as a comma-separated list inside square bracket.
+
+```Rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+}
+```
+
+#### Accessing Array Elements
+
+An array is a single chunk of memory of a known, fixed size that can be allocated on the stack. We can access elements of an array using indexing, like this:
+
+```Rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    let first = a[0];
+    let second = a[1];
+}
+```
