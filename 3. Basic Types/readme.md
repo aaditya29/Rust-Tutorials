@@ -71,3 +71,68 @@ fn main() {
     let f: bool = false; // with explicit type annotation
 }
 ```
+
+### The Character Type
+
+Rust’s char type is the language’s most primitive alphabetic type.<br>
+<b>For Example:</b>
+
+```Rust
+fn main() {
+    let c = 'z';
+    let z: char = 'ℤ'; // with explicit type annotation
+    let heart_eyed_cat = '😻';
+}
+```
+
+We specify `char` literals with single quotes, as opposed to string literals, which use double quotes. <br>
+Rust’s char type is four bytes in size and represents a Unicode Scalar Value, which means it can represent a lot more than just ASCII. Accented letters; Chinese, Japanese, and Korean characters; emoji; and zero-width spaces are all valid char values in Rust.<br>
+
+## Compound Types
+
+Compound types can group multiple values into one type. Rust has two primitive compound types: tuples and arrays.<br>
+
+### The Tuple Type
+
+A tuple is a general way of grouping together a number of values with a variety of types into one compound type. Tuples have a fixed length: once declared, they cannot grow or shrink in size.<br>
+
+We create a tuple by writing a comma-separated list of values inside parentheses. Each position in the tuple has a type, and the types of the different values in the tuple don’t have to be the same.<br>
+<b>For Example:</b>
+
+```Rust
+fn main() {
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+}
+```
+
+The variable `tup` binds to the entire tuple because a tuple is considered a single compound element.<br>
+
+To get the individual values out of a tuple, we can use pattern matching to destructure a tuple value.
+<b>For Example:</b>
+
+```Rust
+fn main() {
+    let tup = (500, 6.4, 1);
+
+    let (x, y, z) = tup;
+
+    println!("The value of y is: {y}");
+}
+```
+
+This program first creates a tuple and binds it to the variable tup. It then uses a pattern with let to take tup and turn it into three separate variables, x, y, and z. This is called `destructuring` because it breaks the single tuple into three parts. Finally, the program prints the value of y, which is 6.4.<br>
+
+We can also access a tuple element directly by using a period (.) followed by the index of the value we want to access.<br>
+</b>For Example:</b>
+
+```Rust
+fn main() {
+    let x: (i32, f64, u8) = (500, 6.4, 1);
+
+    let five_hundred = x.0;
+
+    let six_point_four = x.1;
+
+    let one = x.2;
+}
+```
