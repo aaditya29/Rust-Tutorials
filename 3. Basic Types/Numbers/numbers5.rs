@@ -11,7 +11,7 @@ fn main() {
 
 fn main() {
     let v1: u16 = 251_u16 + 8; // Max limit of u8 is 255 so 259 will overflow.
-    let v2: i16 = i16::checked_add(251, 8).unwrap; // Max limit of i16 is 255 so 259 will overflow.
+    let v2: i16 = i16::checked_add(251, 8).unwrap(); // Max limit of i16 is 255 so 259 will overflow.
 
     println!("{}, {}", v1, v2);
 }
