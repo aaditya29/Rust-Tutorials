@@ -39,3 +39,41 @@ To conclude we can summarise this as following:<br>
 
 In languages with a garbage collector (GC), the GC keeps track of and cleans up memory that isn’t being used anymore, and we don’t need to think about it. In most languages without a GC, it’s our responsibility to identify when memory is no longer being used and to call code to explicitly free it, just as we did to request it. Doing this correctly has historically been a difficult programming problem. If we forget, we’ll waste memory. If we do it too early, we’ll have an invalid variable. If we do it twice, that’s a bug too. We need to pair exactly one allocate with exactly one free.<br>
 But Rust takes a different path: the memory is automatically returned once the variable that owns it goes out of scope.<br>
+
+```Rust
+    {
+        let s = String::from("hello"); // s is valid from this point forward
+
+        // do stuff with s
+    }                                  // this scope is now over, and s is no
+                                       // longer valid
+```
+
+When a variable goes out of scope, Rust calls a special function for us. This function is called `drop`, and it’s where the author of `String` can put the code to return the memory. Rust calls `drop` automatically at the closing curly bracket. This pattern of deallocating resources at the end of an item’s lifetime is similar to C++'s Resource Acquisition Is Initialization (RAII).
+
+### Variables and Data Interacting with Move
+
+Multiple variables can interact with the same data in different ways in Rust
+
+```Rust
+    let x = 5;
+    let y = x;
+```
+
+Here we “bind the value 5 to `x`; then make a copy of the value in `x` and bind it to `y`.” We now have two variables, x and y, and both equal `5`. The x and y are having a value 5 which is now pushed onto the stack.<br>
+
+Now looking at the `String` version:
+
+```Rust
+    let s1 = String::from("hello");
+    let s2 = s1;
+
+```
+
+One can assume that the way it works would be the same: that is, the second line would make a copy of the value in `s1` and bind it to `s2`.<br>
+
+##### BUT WE ARE WRONG!!!
+
+A `String` is made up of three parts, shown on the left: a pointer to the memory that holds the contents of the string, a length, and a capacity. This group of data is stored on the stack. On the right is the memory on the heap that holds the contents.<br>
+
+![Representation in memory of a String holding the value "hello" bound to s1](Image124.png)
