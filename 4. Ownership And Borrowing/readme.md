@@ -83,4 +83,57 @@ When we assign s1 to s2, the String data is copied, meaning we copy the pointer,
 ![Representation in memory of the variable s2 that has a copy of the pointer, length, and capacity of s1](<Image 125.png>)
 
 The representation does not look like figure below, which is what memory would look like if Rust instead copied the heap data as well. If Rust did this, the operation s2 = s1 could be very expensive in terms of runtime performance if the data on the heap were large.<br>
+
 ![Another possibility for what s2 = s1 might do if Rust copied the heap data as well](<Image 126.png>)
+
+Now in string when s2 and s1 go out of scope, they will both try to free the same memory. This is known as a double free error and is one of the memory safety bugs we mentioned previously. Freeing memory twice can lead to memory corruption, which can potentially lead to security vulnerabilities.<br>
+To ensure memory safety, after the line `let s2 = s1;`, Rust considers `s1` as no longer valid. Therefore, Rust doesn’t need to free anything when s1 goes out of scope.<br>
+
+### Variables and Data Interacting with Clone
+
+If we do want to deeply copy the heap data of the String, not just the stack data, we can use a common method called `clone`.<br>
+Following is an example of the clone method:
+
+```Rust
+    let s1 = String::from("hello");
+    let s2 = s1.clone();
+
+    println!("s1 = {}, s2 = {}", s1, s2);
+
+```
+
+<b>Output:</b> s1 = hello, s2 = hello<br>
+
+When we see a call to clone, you know that some arbitrary code is being executed and that code may be expensive. It’s a visual indicator that something different is going on.<br>
+
+### Ownership and Functions
+
+The mechanics of passing a value to a function are similar to those when assigning a value to a variable. Passing a variable to a function will move or copy, just as assignment does.<br>
+
+```Rust
+fn main() {
+    let s = String::from("hello");  // s comes into scope
+
+    takes_ownership(s);             // s's value moves into the function...
+                                    // ... and so is no longer valid here
+
+    let x = 5;                      // x comes into scope
+
+    makes_copy(x);                  // x would move into the function,
+                                    // but i32 is Copy, so it's okay to still
+                                    // use x afterward
+
+} // Here, x goes out of scope, then s. But because s's value was moved, nothing
+  // special happens.
+
+fn takes_ownership(some_string: String) { // some_string comes into scope
+    println!("{}", some_string);
+} // Here, some_string goes out of scope and `drop` is called. The backing
+  // memory is freed.
+
+fn makes_copy(some_integer: i32) { // some_integer comes into scope
+    println!("{}", some_integer);
+} // Here, some_integer goes out of scope. Nothing special happens.
+```
+
+If we tried to use `s` after the call to takes_ownership, Rust would throw a compile-time error.
