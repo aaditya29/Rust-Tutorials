@@ -8,3 +8,9 @@ fn main() {
 }
 
 */
+
+fn main() {
+    let x = String::from("hello, world");
+    let y: String = x.clone(); //We can't copy the data directly in string
+    println!("{},{}", x, y);
+}
