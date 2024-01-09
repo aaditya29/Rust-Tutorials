@@ -10,3 +10,9 @@ fn main() {
     / You can't use r1 and r2 at the same time
 }
 */
+fn main() {
+    let mut s = String::from("hello, ");
+
+    let r1 = &mut s;
+    let r2 = &mut s;
+}

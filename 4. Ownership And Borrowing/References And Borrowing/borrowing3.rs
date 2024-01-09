@@ -1,6 +1,6 @@
-/*
+// Borrowing a mutable object as immutable
 
-/ This code has no errors!
+// This code has no errors!
 fn main() {
     let mut s = String::from("hello, ");
 
@@ -12,4 +12,3 @@ fn main() {
 }
 
 fn borrow_object(s: &String) {}
-*/
