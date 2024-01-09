@@ -175,3 +175,29 @@ fn takes_and_gives_back(a_string: String) -> String { // a_string comes into
 ```
 
 The ownership of a variable follows the same pattern every time: assigning a value to another variable moves it. When a variable that includes data on the heap goes out of scope, the value will be cleaned up by `drop` unless ownership of the data has been moved to another variable.
+
+## References And Borrowing
+
+### The Rules Of References
+
+A reference is like a pointer in that it’s an address we can follow to access the data stored at that address; that data is owned by some other variable. Unlike a pointer, a reference is guaranteed to point to a valid value of a particular type for the life of that reference.
+
+- At any given time, you can have either one mutable reference or any number of immutable references.
+
+- References must always be valid.
+
+#### Reference Example
+
+```Rust
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
