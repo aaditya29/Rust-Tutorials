@@ -201,3 +201,68 @@ fn calculate_length(s: &String) -> usize {
     s.len()
 }
 ```
+
+#### Borrowing Rules Example
+
+This code results in an error:
+
+```Rust
+    let mut s = String::from("hello");
+
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    let r3 = &mut s; // BIG PROBLEM => either we can have any number of immutable references or one mutable reference not both
+
+    println!("{}, {}, and {}", r1, r2, r3);
+
+```
+
+Now this code will compile because the last usage of the immutable references, the println!, occurs before the mutable reference is introduced.
+
+```Rust
+    let mut s = String::from("hello");
+
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    println!("{} and {}", r1, r2);
+    // variables r1 and r2 will not be used after this point
+
+    let r3 = &mut s; // no problem
+    println!("{}", r3);
+
+```
+
+### Dangling References
+
+In languages with pointers, it’s easy to erroneously create a dangling pointer—a pointer that references a location in memory that may have been given to someone else—by freeing some memory while preserving a pointer to that memory.<br>
+In Rust, by contrast, the compiler guarantees that references will never be dangling references: if you have a reference to some data, the compiler will ensure that the data will not go out of scope before the reference to the data does.<br>
+
+Here we are creating a dangling reference to see how Rust prevents them with a compile-time error.
+
+```Rust
+fn main() {
+    let reference_to_nothing = dangle();
+}
+
+fn dangle() -> &String {
+    let s = String::from("hello");
+
+    &s
+}
+```
+
+`This function's return type contains a borrowed value, but there is no value for it to be borrowed from.`<br>
+
+Because s is created inside dangle, when the code of dangle is finished, s will be deallocated. But we tried to return a reference to it. That means this reference would be pointing to an invalid String.<br>
+
+Correct way of doing this:
+
+```Rust
+fn no_dangle() -> String {
+    let s = String::from("hello");
+
+    s
+}
+```
+
+This works without any problems. Ownership is moved out, and nothing is deallocated.<br>
