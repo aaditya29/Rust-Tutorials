@@ -9,3 +9,9 @@ fn main() {
     println!("Success!");
 }
 */
+
+fn main() {
+    let s: &str = "hello, world";
+
+    println!("Success!");
+}
