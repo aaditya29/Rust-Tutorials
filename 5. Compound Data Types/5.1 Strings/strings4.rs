@@ -9,3 +9,12 @@ fn main() {
     println!("{}", s);
 }
 */
+
+fn main() {
+    let mut s = String::from("hello"); // making variable s mutable because changing further
+    s.push(',');
+    s.push_str("world");
+    s += "!";
+
+    println!("{}", s);
+}

@@ -13,3 +13,14 @@ fn main() {
     println!("Success!");
 }
 */
+
+fn main() {
+    let mut s: String = String::from(""); // Using string not &s(string literals) because literals are immutable
+    s.push_str("hello, world");
+    s.push('!'); // pushing a single char
+
+    assert_eq!(s, "hello, world!");
+
+    println!("{}", s);
+    println!("Success!");
+}
