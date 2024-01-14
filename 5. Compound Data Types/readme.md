@@ -13,3 +13,26 @@ Where `&str` is a slice (&[u8]) that always points to a valid UTF-8 sequence, an
 There are multiple ways to write string literals with special characters in them. All result in a similar &str so it's best to use the form that is the most convenient to write. Similarly there are multiple ways to write byte string literals, which all result in &[u8; N].<br>
 
 ## Arrays
+
+An array is a collection of objects of the same type T, stored in contiguous memory. Arrays are created using brackets [], and their length, which is known at compile time, is part of their type signature [T; length].<br>
+
+### Primitive Type Array
+
+It is a fixed-size array, denoted `[T; N]`, for the element type, `T`, and the non-negative compile-time constant size, `N`.<br>
+There are two syntactic forms for creating an array:
+
+- A list with each element, i.e., [x, y, z].
+- A repeat expression [expr; N] where N is how many times to repeat expr in the array. expr must either be: - A value of a type implementing the Copy trait - A const value
+  - Note that [expr; 0] is allowed, and produces an empty array.
+  - This will still evaluate expr, however, and immediately drop the resulting value, so be mindful of side effects.<br>
+
+Arrays of any size implement the following traits if the element type allows it:
+
+- Copy
+- Clone
+- Debug
+- IntoIterator (implemented for [T; N], &[T; N] and &mut [T; N])
+- PartialEq, PartialOrd, Eq, Ord
+- Hash
+- AsRef, AsMut
+- Borrow, BorrowMut
