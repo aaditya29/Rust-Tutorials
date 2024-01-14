@@ -11,3 +11,5 @@ Where `&str` is a slice (&[u8]) that always points to a valid UTF-8 sequence, an
 ### String Literals
 
 There are multiple ways to write string literals with special characters in them. All result in a similar &str so it's best to use the form that is the most convenient to write. Similarly there are multiple ways to write byte string literals, which all result in &[u8; N].<br>
+
+## Arrays
