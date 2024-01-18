@@ -12,3 +12,12 @@ fn main() {
     println!("Success!");
 }
 */
+
+fn main() {
+    let arr: [char; 3] = ['中', '国', '人'];
+
+    let slice = &arr[..2];
+
+    // TIPS: slice( reference ) IS NOT an array, because if it is, then `assert!` will passed: each of the two UTF-8 chars '中' and '国'  occupies 4 bytes, 2 * 4 = 8
+    assert!(std::mem::size_of_val(&slice) == 16);
+}
