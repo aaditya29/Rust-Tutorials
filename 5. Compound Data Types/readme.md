@@ -52,3 +52,7 @@ for x in array {
     print!("{x} ");
 }
 ```
+
+## Structs
+
+> A struct, or structure, is a custom data type that lets us package together and name multiple related values that make up a meaningful group. If you’re familiar with an object-oriented language, a struct is like an object’s data attributes.
