@@ -112,3 +112,5 @@ fn main() {
     user1.email = String::from("anotheremail@example.com");
 }
 ```
+
+> Note: Note that the entire instance must be mutable; Rust doesn’t allow us to mark only certain fields as mutable.<br>
