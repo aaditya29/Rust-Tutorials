@@ -18,7 +18,7 @@ fn main() {
     p.age = 30;
 
     / Fill the blank
-    __ = String::from("sunfei");
+    _ = String::from("sunfei");
 
     println!("Success!");
 }
