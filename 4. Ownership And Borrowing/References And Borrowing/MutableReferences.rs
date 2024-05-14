@@ -16,3 +16,11 @@ let mut x = 5; creates a mutable variable x and initializes it with the value 5.
 let y = &mut x; creates a mutable reference y that points to the memory location of x.
 (*)y = 10; dereferences the mutable reference y and assigns the value 10 to the value it points to, which is x.
 */
+
+fn main() {
+    let mut name = String::from("abc");
+    let name1 = &mut name; // creating a mutable reference to name
+    *name1 = String::from("def");
+    println!("{name1}");
+    println!("{name}");
+}
